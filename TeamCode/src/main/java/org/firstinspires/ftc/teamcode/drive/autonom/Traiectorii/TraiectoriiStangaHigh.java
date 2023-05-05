@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.autonom.Traiectorii;
+package org.firstinspires.ftc.teamcode.drive.autonom.Traiectorii;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 import org.firstinspires.ftc.teamcode.AutoPosition;
-import org.firstinspires.ftc.teamcode.autonom.AutoUtil;
-import org.firstinspires.ftc.teamcode.autonom.AutonomStangaHigh;
+import org.firstinspires.ftc.teamcode.drive.autonom.AutoUtil;
+import org.firstinspires.ftc.teamcode.drive.autonom.AutonomStangaHigh;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 

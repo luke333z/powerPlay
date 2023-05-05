@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.autonom;
+package org.firstinspires.ftc.teamcode.drive.autonom;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.autonom.OpenCV.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.autonom.Traiectorii.TraiectoriiStangaHigh;
+import org.firstinspires.ftc.teamcode.drive.autonom.OpenCV.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.drive.autonom.Traiectorii.TraiectoriiDreaptaHigh;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -21,10 +20,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Config
-
-
 @Autonomous(group = "autonom")
-public class AutonomStangaHigh extends LinearOpMode {
+public class AutonomDreaptaHigh extends LinearOpMode {
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -50,10 +47,9 @@ public class AutonomStangaHigh extends LinearOpMode {
     public AprilTagDetection tagOfInterest = null;
 
     public SampleMecanumDrive mecanumDrive;
-    public Servo catcher,adjuster;
+    public Servo catcher;
     public DcMotorEx liftMotor1, liftMotor2, plateMotor;
     public AutoUtil AutoUtil = new AutoUtil();
-    public RevColorSensorV3 sensor;
     int detected = 3;
     @Override
     public void runOpMode() throws InterruptedException {
@@ -61,8 +57,7 @@ public class AutonomStangaHigh extends LinearOpMode {
         liftMotor2 = hardwareMap.get(DcMotorEx.class, "liftMotor2");
         plateMotor = hardwareMap.get(DcMotorEx.class, "plateMotor");
         catcher = hardwareMap.get(Servo.class, "catcherServo");
-        adjuster = hardwareMap.get(Servo.class, "adjustServo");
-        sensor = hardwareMap.get(RevColorSensorV3.class, "sensor");
+        catcher.setPosition(.4f);
         liftMotor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         liftMotor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         plateMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -90,7 +85,6 @@ public class AutonomStangaHigh extends LinearOpMode {
         telemetry.setMsTransmissionInterval(50);
 
         initialize();
-        new TraiectoriiStangaHigh(this).initializeTrajectories();
         while (!isStarted() && !isStopRequested()) {
             detectie();
             if(tagOfInterest != null)
@@ -99,7 +93,7 @@ public class AutonomStangaHigh extends LinearOpMode {
             telemetry.update();
         }
         while (opModeIsActive() && !isStopRequested()) {
-            new TraiectoriiStangaHigh(this).runAuto(detected);
+            new TraiectoriiDreaptaHigh(this).runAuto(detected);
             sleep(30000);
         }
     }
@@ -119,17 +113,16 @@ public class AutonomStangaHigh extends LinearOpMode {
         }
     }
     private void initialize(){
-        liftMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         liftMotor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        liftMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         liftMotor2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        plateMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER); /// era fara encoder
+        liftMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         plateMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        plateMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER); /// era fara encoder
         mecanumDrive = new SampleMecanumDrive(hardwareMap);
         mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
         mecanumDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mecanumDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         AutoUtil.setClaw(catcher,false);
-        adjuster.setPosition(0f);
     }
 }

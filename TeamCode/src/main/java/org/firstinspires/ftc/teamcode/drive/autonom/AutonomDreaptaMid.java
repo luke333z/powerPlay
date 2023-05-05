@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonom;
+package org.firstinspires.ftc.teamcode.drive.autonom;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.autonom.OpenCV.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.autonom.Traiectorii.TraiectoriiDreaptaMid;
+import org.firstinspires.ftc.teamcode.drive.autonom.OpenCV.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.drive.autonom.Traiectorii.TraiectoriiDreaptaMid;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
