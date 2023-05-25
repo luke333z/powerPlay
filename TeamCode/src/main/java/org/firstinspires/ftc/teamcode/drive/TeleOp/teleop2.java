@@ -133,6 +133,7 @@ public class teleop2 extends LinearOpMode {
         ///colorDetect();
     }
 
+
     private void debugTelemetry() {
         telemetry.addData("lift1", liftMotor1.getCurrentPosition());
         telemetry.addData("lift2", liftMotor2.getCurrentPosition());
