@@ -37,8 +37,6 @@ public class lukeTeleOp extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();
 
-
-
     @Override
     public void runOpMode() throws InterruptedException {
         initialization();
