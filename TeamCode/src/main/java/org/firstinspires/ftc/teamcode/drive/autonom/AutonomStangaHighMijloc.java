@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonom;
+package org.firstinspires.ftc.teamcode.drive.autonom;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.autonom.OpenCV.AprilTagDetectionPipeline;
-import org.firstinspires.ftc.teamcode.autonom.Traiectorii.TraiectoriiDreaptaHighMijloc;
+import org.firstinspires.ftc.teamcode.drive.autonom.OpenCV.AprilTagDetectionPipeline;
+import org.firstinspires.ftc.teamcode.drive.autonom.Traiectorii.TraiectoriiStangaHighMijloc;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 
 @Autonomous(group = "autonom")
-public class AutonomDreaptaHighMijloc extends LinearOpMode {
+public class AutonomStangaHighMijloc extends LinearOpMode {
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -42,8 +42,6 @@ public class AutonomDreaptaHighMijloc extends LinearOpMode {
 
     // UNITS ARE METERS
     double tagsize = 0.166;
-
-    boolean inited = false;
 
     int Left = 1;
     int Middle = 2;
@@ -92,7 +90,7 @@ public class AutonomDreaptaHighMijloc extends LinearOpMode {
         telemetry.setMsTransmissionInterval(50);
 
         initialize();
-        new TraiectoriiDreaptaHighMijloc(this).initializeTrajectories();
+        new TraiectoriiStangaHighMijloc(this).initializeTrajectories();
         while (!isStarted() && !isStopRequested()) {
             detectie();
             if(tagOfInterest != null)
@@ -101,7 +99,7 @@ public class AutonomDreaptaHighMijloc extends LinearOpMode {
             telemetry.update();
         }
         while (opModeIsActive() && !isStopRequested()) {
-            new TraiectoriiDreaptaHighMijloc(this).runAuto(detected);
+            new TraiectoriiStangaHighMijloc(this).runAuto(detected);
             sleep(30000);
         }
     }
@@ -132,6 +130,6 @@ public class AutonomDreaptaHighMijloc extends LinearOpMode {
         mecanumDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mecanumDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         AutoUtil.setClaw(catcher,false);
-        adjuster.setPosition(0f);
+        adjuster.setPosition(1f);
     }
 }

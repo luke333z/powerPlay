@@ -1,18 +1,18 @@
-package org.firstinspires.ftc.teamcode.autonom.Traiectorii;
+package org.firstinspires.ftc.teamcode.drive.autonom.Traiectorii;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 
 import org.firstinspires.ftc.teamcode.AutoPosition;
-import org.firstinspires.ftc.teamcode.autonom.AutoUtil;
-import org.firstinspires.ftc.teamcode.autonom.AutonomDreaptaHighMijloc;
+import org.firstinspires.ftc.teamcode.drive.autonom.AutoUtil;
+import org.firstinspires.ftc.teamcode.drive.autonom.AutonomStangaHighMijloc;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
-public class TraiectoriiDreaptaHighMijloc {
-    AutonomDreaptaHighMijloc auto;
+public class TraiectoriiStangaHighMijloc {
+    AutonomStangaHighMijloc auto;
     TrajectorySequence deliverPreload,catchCone1,deliverCone1, deliverCone2, catchCone2,catchCone3,catchCone4,catchCone5,deliverCone3,deliverCone4,deliverCone5mid,deliverCone5high,deliverCone5,park1,park2,park3;
 
-    public TraiectoriiDreaptaHighMijloc(AutonomDreaptaHighMijloc auto){
+    public TraiectoriiStangaHighMijloc(AutonomStangaHighMijloc auto){
         this.auto = auto;
         initializeTrajectories();
     }
@@ -26,106 +26,108 @@ public class TraiectoriiDreaptaHighMijloc {
                 .setConstraints
                         (SampleMecanumDrive.getVelocityConstraint(40,MAX_ANG_VEL,TRACK_WIDTH)
                                 ,SampleMecanumDrive.getAccelerationConstraint(40))
-                .strafeLeft(55.5)
-                .back(7)
+                .strafeRight(53.2)
+                .back(5)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.MID))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2080))
-                .addTemporalMarker(.7, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2080))
+                .addTemporalMarker(.7, () -> auto.adjuster.setPosition(0.1))
                 .build();
         catchCone1 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(24.8)
-                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .setConstraints
+                        (SampleMecanumDrive.getVelocityConstraint(40,MAX_ANG_VEL,TRACK_WIDTH)
+                                ,SampleMecanumDrive.getAccelerationConstraint(40))
+                .forward(24.2)
+                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(.35, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.CONE5))
                 .build();
         deliverCone1 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .back(25.3)
+                .back(24.5)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.MIDother))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2070))
-                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2080))
+                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.1))
                 .build();
         catchCone2 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(26)
-                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(24.7)
+                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(.35, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.CONE4))
                 .build();
         deliverCone2 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .back(50.4)
+                .back(49.5)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.HIGHother))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2050))
-                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2050))
+                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.1))
                 .build();
         catchCone3 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
                 ///.strafeLeft(0.1)
-                .forward(50.8)
-                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(49.7)
+                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(.35, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.CONE3))
                 .build();
         deliverCone3 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .back(51.1)
+                .back(49.7)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.HIGHother))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2040))
-                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2050))
+                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.05))
                 .build();
         catchCone4 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(52)
-                .addTemporalMarker( 0, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(50.9)
+                .addTemporalMarker( 0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(.35, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.CONE2))
                 .build();
         deliverCone4 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .back(51.6)
+                .back(50.5)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.HIGHother))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2030))
-                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2050))
+                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.05))
                 .build();
         catchCone5 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(52.6)
-                .strafeRight(0.5)
-                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(50.6)
+                .addTemporalMarker(0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(.35, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.ZERO))
                 .build();
         deliverCone5mid = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .back(26)
+                .back(24.8)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.MIDother))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2000))
-                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2080))
+                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.05))
                 .build();
         deliverCone5high = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .back(51.8)
+                .back(51.1)
                 .addTemporalMarker(0, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.HIGHother))
-                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,2010))
-                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.8))
+                .addTemporalMarker(.5, () -> AutoUtil.platePosition(auto.plateMotor,-2050))
+                .addTemporalMarker(.5, () -> auto.adjuster.setPosition(0.05))
                 .build();
         park3 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(11.2)
-                .turn(Math.toRadians(-80))
-                .addTemporalMarker(.0, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(10.5)
+                .turn(Math.toRadians(85))
+                .addTemporalMarker(.0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(2, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.ZERO))
-                .build();
+                .build();//samplemecanumdrive.getvelocityconstraints 48,math.toraad(),track 13
         park2 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(7.6)
-                .turn(Math.toRadians(-80))
-                .addTemporalMarker(.3, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(6.5)
+                .turn(Math.toRadians(85))
+                .addTemporalMarker(.0, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(1.7, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.ZERO))
                 .build();
         park1 = auto.mecanumDrive
                 .trajectorySequenceBuilder(new Pose2d())
-                .forward(29.3)
-                .turn(Math.toRadians(-80))
-                .addTemporalMarker(.3, () -> AutoUtil.platePosition(auto.plateMotor,1745))
-                .addTemporalMarker(2, () -> AutoUtil.platePosition(auto.plateMotor,1045))
+                .forward(29.5)
+                .turn(Math.toRadians(85))
+                .addTemporalMarker(.0, () -> AutoUtil.platePosition(auto.plateMotor,-1745))
+                .addTemporalMarker(2, () -> AutoUtil.platePosition(auto.plateMotor,-1045))
                 .addTemporalMarker(2.2, () -> AutoUtil.liftPosition(auto.liftMotor1, auto.liftMotor2, AutoPosition.ZERO))
                 .build();
     }
@@ -137,7 +139,7 @@ public class TraiectoriiDreaptaHighMijloc {
         auto.sleep(250);
         auto.AutoUtil.setClaw(auto.catcher,true);
         auto.sleep(100);
-        auto.adjuster.setPosition(0f);
+        auto.adjuster.setPosition(1f);
         auto.mecanumDrive.followTrajectorySequence(catchCone1);
         auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
         auto.sleep(100);
@@ -148,7 +150,7 @@ public class TraiectoriiDreaptaHighMijloc {
         auto.sleep(200);
         auto.AutoUtil.setClaw(auto.catcher,true);
         auto.sleep(100);
-        auto.adjuster.setPosition(0f);
+        auto.adjuster.setPosition(1f);
         auto.mecanumDrive.followTrajectorySequence(catchCone2);
         auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
         auto.sleep(100);
@@ -159,7 +161,7 @@ public class TraiectoriiDreaptaHighMijloc {
         auto.sleep(200);
         auto.AutoUtil.setClaw(auto.catcher,true);
         auto.sleep(100);
-        auto.adjuster.setPosition(0f);
+        auto.adjuster.setPosition(1f);
         auto.mecanumDrive.followTrajectorySequence(catchCone3);
         auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
         auto.sleep(100);
@@ -170,7 +172,7 @@ public class TraiectoriiDreaptaHighMijloc {
         auto.sleep(200);
         auto.AutoUtil.setClaw(auto.catcher,true);
         auto.sleep(100);
-        auto.adjuster.setPosition(0f);
+        auto.adjuster.setPosition(1f);
         auto.mecanumDrive.followTrajectorySequence(catchCone4);
         auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
         auto.sleep(100);
@@ -181,19 +183,19 @@ public class TraiectoriiDreaptaHighMijloc {
         auto.sleep(200);
         auto.AutoUtil.setClaw(auto.catcher,true);
         auto.sleep(100);
-        auto.adjuster.setPosition(0f);
+        auto.adjuster.setPosition(1f);
         auto.mecanumDrive.followTrajectorySequence(catchCone5);
         auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
         auto.sleep(150);
         auto.AutoUtil.setClaw(auto.catcher,false);
         auto.sleep(200);
-        if(detected==1) {
+        if(detected==3) {
             auto.mecanumDrive.followTrajectorySequence(deliverCone5high);
             auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
             auto.sleep(200);
             auto.AutoUtil.setClaw(auto.catcher,true);
-            auto.sleep(150);
-            auto.adjuster.setPosition(0f);
+            auto.sleep(100);
+            auto.adjuster.setPosition(1f);
             auto.mecanumDrive.followTrajectorySequence(park3);
         }
         else if(detected==2) {
@@ -201,8 +203,8 @@ public class TraiectoriiDreaptaHighMijloc {
             auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
             auto.sleep(200);
             auto.AutoUtil.setClaw(auto.catcher,true);
-            auto.sleep(150);
-            auto.adjuster.setPosition(0f);
+            auto.sleep(100);
+            auto.adjuster.setPosition(1f);
             auto.mecanumDrive.followTrajectorySequence(park2);
         }
         else {
@@ -210,8 +212,8 @@ public class TraiectoriiDreaptaHighMijloc {
             auto.mecanumDrive.setPoseEstimate(new Pose2d(0, 0));
             auto.sleep(200);
             auto.AutoUtil.setClaw(auto.catcher,true);
-            auto.sleep(150);
-            auto.adjuster.setPosition(0f);
+            auto.sleep(100);
+            auto.adjuster.setPosition(1f);
             auto.mecanumDrive.followTrajectorySequence(park1);
         }
     }
